@@ -1,18 +1,16 @@
 import { GoogleBooksService } from "../book-list/books.service";
 import { Injectable } from "@angular/core";
 import { Actions,createEffect, ofType } from "@ngrx/effects";
-import {catchError, map, switchMap} from 'rxjs/operators';
-import {of} from 'rxjs';
-import { loadBooks, loadBooksError, loadBooksSuccess } from "./books.actions";
+import {map, switchMap} from 'rxjs/operators';
+import { BooksApiActions } from "./books.actions";
 
 @Injectable()
 export class BookEffects {
   loadBooks$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(loadBooks),
+      ofType(BooksApiActions.retrievedBookList),
       switchMap(() => this.bookService.getBooks().pipe(
-        map(books => loadBooksSuccess({books})),
-        catchError(() => of(loadBooksError()))
+        map(books => BooksApiActions.retrievedBookList({books}))
       ))
     )
   );
