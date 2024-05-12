@@ -19,3 +19,12 @@ export const BooksApiActions = createActionGroup({
 export const loadBooks = createAction('[Book List] Load Books');
 export const loadBooksSuccess = createAction('[Book List] Load Books Success', props<{books: Book[]}>());
 export const loadBooksError = createAction('[Book List] Load Books Error');
+
+export const addBook = createAction(
+  '[Book Add] Add Book',
+  props<{bookId: string }>()
+);
+export const removeBook = createAction(
+  '[Book Remove] Remove Book',
+   props<{ bookId: string }>()
+);
